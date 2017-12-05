@@ -1,0 +1,40 @@
+version: '2'
+services:
+  web:
+    restart: always
+    build: .
+    container_name: meanjs
+    ports:
+     - "3000:3000"
+     - "5858:5858"
+     - "8080:8080"
+     - "35729:35729"
+    environment:
+     - NODE_ENV=development
+     - DB_1_PORT_27017_TCP_ADDR=mongodb
+    depends_on:
+     - mongodb
+    volumes_from:
+     - web-data
+     
+  web-data:
+    build: .
+    entrypoint: /bin/true
+    volumes:
+     - ./:/opt/mean.js
+     - /opt/mean.js/node_modules
+     - /opt/mean.js/public
+     - /opt/mean.js/uploads
+     
+  mongodb:
+    image: mongo:3.2
+    restart: always
+    ports:
+     - "27017:27017"
+    
+  mongo-seed:
+    build: ./mongo-seed
+    depends_on:
+        - mongodb
+    links:
+        - mongodb
