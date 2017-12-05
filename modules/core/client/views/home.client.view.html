@@ -1,0 +1,34 @@
+<section>
+  <div class="jumbotron text-center">
+    <div class="row">
+      <p class="lead">
+        Social Determinants for Health Data
+      </p>
+    </div>
+    <!--<div class="row">
+      <p>
+        <a class="btn btn-primary btn-lg" href="path-to-our-documentation" target="_blank">Learn more</a>
+      </p>
+    </div>-->
+  </div>
+  <div class="text-center">
+    <p>This could be a nice introductory paragraph explaining what you want to do</p>
+    <p>For instance, enter a patient ID in the box below...</p>
+    <form ng-submit="vm.patientSearch();" >
+      <input name="patient-search" type="text" ng-model="vm.patientID" />
+      <input class="btn btn-primary" id="submit" type="submit" />
+    </form>
+  </div>
+  <div class="panel panel-primary" ng-show="vm.transportationRisk()">
+    <div class="panel-heading">
+      <div class="panel-title">Transportation</div>
+    </div>
+    <div class="panel-body">
+      <p>Based on this patient's primary address, they have been flagged as being potentially at risk of having inadequate transportation.  it is recommended to ask the questions below and provide them with the help suggested if they answer positively.</p>
+      <label>Do you need help with transportation?</label><button ng-click="vm.needsTransport = true">Yes </button>
+      <div ng-show="vm.needsTransport">
+        <a ng-href="https://www.auntbertha.com/transit/help-pay-for-transit?postal={{vm.patient.address[  0].postalCode}}">Aunt Bertha transportation help</a>
+      </div>
+    </div>
+  </div>
+</section>
